@@ -11,7 +11,6 @@ export default EStyleSheet.create({
         paddingTop: 20,
       },
       '@media android': {
-        paddingTop: StatusBar.currentHeight,
       },
     },
 
