@@ -14,6 +14,11 @@ const InputWithButton = (props) => {
     containerStyles.push(styles.containerDisabled);
   }
 
+  const buttonTextStyles = [styles.buttonText];
+  if (props.textColor) {
+    buttonTextStyles.push({ color: props.textColor });
+  };
+
   return (
     <View style={containerStyles}>
 
@@ -22,7 +27,7 @@ const InputWithButton = (props) => {
         onPress={onPress}
         underlayColor={underlayColor}
       >
-      <Text style={styles.buttonText}>{buttonText}</Text>
+      <Text style={buttonTextStyles}>{buttonText}</Text>
       </TouchableHighlight>
 
 
@@ -39,6 +44,7 @@ InputWithButton.propTypes = {
   onPress: PropTypes.func,
   buttonText: PropTypes.string,
   editable: PropTypes.bool,
+  textColor: PropTypes.string,
 };
 
 export default InputWithButton;

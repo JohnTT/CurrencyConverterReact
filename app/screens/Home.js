@@ -31,6 +31,7 @@ class Home extends Component {
     conversionRate: PropTypes.number,
     isFetching: PropTypes.bool,
     lastConvertedDate: PropTypes.object,
+    primaryColor: PropTypes.string,
   };
 
   constructor() {
@@ -74,40 +75,54 @@ class Home extends Component {
     };
 
     return (
-      <Container>
-          <StatusBar translucent={false} barStyle="light-content"/>
-          <Header onPress={this.handleOptionsPress}/>
+      <Container backgroundColor={this.props.primaryColor}>
 
-          <KeyboardAvoidingView behavior="padding">
-            <Logo />
+        <StatusBar
+          translucent={false}
+          barStyle="light-content"/>
 
-            <InputWithButton
-              buttonText={this.props.baseCurrency}
-              onPress={this.handlePressBaseCurrency}
-              defaultValue={this.props.amount.toString()}
-              keyboardType="numeric"
-              onChangeText={this.handleTextChange}
+        <Header onPress={this.handleOptionsPress}/>
+
+
+        <KeyboardAvoidingView behavior="padding">
+
+          <Logo tintColor={this.props.primaryColor}/>
+
+
+          <InputWithButton
+            buttonText={this.props.baseCurrency}
+            onPress={this.handlePressBaseCurrency}
+            defaultValue={this.props.amount.toString()}
+            keyboardType="numeric"
+            onChangeText={this.handleTextChange}
+            textColor={this.props.primaryColor}
             />
 
-            <InputWithButton
-              buttonText={this.props.quoteCurrency}
-              onPress={this.handlePressQuoteCurrency}
-              editable={false}
-              value={quotePrice}
+
+          <InputWithButton
+            buttonText={this.props.quoteCurrency}
+            onPress={this.handlePressQuoteCurrency}
+            editable={false}
+            value={quotePrice}
+            textColor={this.props.primaryColor}
             />
 
-            <LastConverted
-              base={this.props.baseCurrency}
-              quote={this.props.quoteCurrency}
-              date={this.props.lastConvertedDate}
-              conversionRate={this.props.conversionRate}
+
+          <LastConverted
+            base={this.props.baseCurrency}
+            quote={this.props.quoteCurrency}
+            date={this.props.lastConvertedDate}
+            conversionRate={this.props.conversionRate}
             />
 
-            <ClearButton
-              text='Reverse Currencies'
-              onPress={this.handleSwapCurrency}
+
+          <ClearButton
+            text='Reverse Currencies'
+            onPress={this.handleSwapCurrency}
             />
-          </KeyboardAvoidingView>
+
+        </KeyboardAvoidingView>
+
       </Container>
     )
   };
@@ -128,6 +143,7 @@ const mapStateToProps = (state) => {
     isFetching: conversionSelector.isFetching,
     lastConvertedDate: conversionSelector.date ?
       new Date(conversionSelector.date) : new Date(),
+    primaryColor: state.theme.primaryColor,
   };
 };
 
